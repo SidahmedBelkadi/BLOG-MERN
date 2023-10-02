@@ -5,15 +5,17 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 const connect = require("./database/connect");
-const authenticationRoute = require("./routes/auth");
-const usersRoute = require("./routes/users");
+const authenticationRoutes = require("./routes/auth");
+const usersRoutes = require("./routes/users");
+const postsRoutes = require("./routes/posts");
 
 // Middlewares
 app.use(express.json());
 
 // Routes
-app.use("/api/auth", authenticationRoute);
-app.use("/api/users", usersRoute);
+app.use("/api/auth", authenticationRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/posts", postsRoutes);
 
 // Connection to database + running express server
 const start = async () => {
