@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json("Something went wrong ....");
   }
 });
 
@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
     res.status(200).json({ user: rest });
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json("Something went wrong ....");
   }
 });
 
