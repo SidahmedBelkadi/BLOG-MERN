@@ -1,14 +1,11 @@
 import "./Posts.css";
 import Post from "../Post/Post";
-const Posts = () => {
+const Posts = ({ posts }) => {
   return (
     <section className="posts">
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => (
+        <Post key={post._id} post={post} />
+      ))}
     </section>
   );
 };

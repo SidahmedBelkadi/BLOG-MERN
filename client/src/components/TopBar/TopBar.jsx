@@ -7,9 +7,12 @@ import {
 } from "react-icons/fa6";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/Context.jsx";
 
 const TopBar = () => {
-  const user = false;
+  const { user, dispatch } = useContext(UserContext);
+
   return (
     <section className="top-bar">
       <div className="top-left">
@@ -33,17 +36,26 @@ const TopBar = () => {
             </Link>
           </li>
           <li className="top-list-item">
-            {user && <li className="top-list-item">LOGOUT</li>}
+            {user && (
+              <li
+                onClick={() => dispatch({ type: "LOGOUT" })}
+                className="top-list-item"
+              >
+                LOGOUT
+              </li>
+            )}
           </li>
         </ul>
       </div>
       <div className="top-right">
         {user ? (
-          <img
-            className="top-img"
-            src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-          />
+          <Link className="link" to="/settings">
+            <img
+              className="top-img"
+              src={`http://localhost:8000/images/${user.profile_picture}`}
+              alt=""
+            />
+          </Link>
         ) : (
           <ul className="top-list">
             <li className="top-list-item">

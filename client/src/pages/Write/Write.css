@@ -5,7 +5,7 @@
 .write-img {
   margin-left: 150px;
   width: 70vw;
-  height: 250px;
+  height: 550px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -50,7 +50,7 @@
 
 .write-submit {
   position: absolute;
-  top: 20px;
+  top: -200px;
   right: 50px;
   color: white;
   background-color: teal;

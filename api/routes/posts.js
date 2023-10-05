@@ -8,6 +8,7 @@ router.post("/", async (req, res) => {
     const post = await Post.create(req.body);
     res.status(201).json(post);
   } catch (error) {
+    console.log(error);
     res.status(500).json("Something went wrong ...");
   }
 });
@@ -64,6 +65,21 @@ router.get("/", async (req, res) => {
 
     res.status(200).json(posts);
   } catch (error) {
+    res.status(500).json("Something went wrong ...");
+  }
+});
+
+// GET SINGLE POST
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findOne({ _id: id });
+    if (!post) {
+      return res.status(404).json("Post not found 404");
+    }
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
     res.status(500).json("Something went wrong ...");
   }
 });

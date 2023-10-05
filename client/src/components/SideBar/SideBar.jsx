@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./SideBar.css";
 import {
   FaSquareFacebook,
@@ -5,8 +6,20 @@ import {
   FaInstagram,
   FaPinterest,
 } from "react-icons/fa6";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
+  const [categories, setCategories] = useState([]);
+  const fetchCategories = async () => {
+    const res = await axios.get("/api/categories");
+    setCategories(res.data.categories);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   return (
     <section className="side-bar">
       <div className="side-bar-item">
@@ -22,12 +35,13 @@ const SideBar = () => {
         <div className="side-bar-item">
           <span className="side-bar-title">CATEGORIES</span>
           <ul className="side-bat-list">
-            <li className="side-bar-list-item">Life</li>
-            <li className="side-bar-list-item">Music</li>
-            <li className="side-bar-list-item">Style</li>
-            <li className="side-bar-list-item">Sport</li>
-            <li className="side-bar-list-item">Tech</li>
-            <li className="side-bar-list-item">Cinema</li>
+            {categories.map((cat) => (
+              <Link className="link" to={`/?cat=${cat.name}`}>
+                <li key={cat._id} className="side-bar-list-item">
+                  {cat.name}
+                </li>
+              </Link>
+            ))}
           </ul>
         </div>
       </div>

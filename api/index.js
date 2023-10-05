@@ -10,11 +10,12 @@ const usersRoutes = require("./routes/users");
 const postsRoutes = require("./routes/posts");
 const categoriesRoutes = require("./routes/categories");
 
+const path = require("path");
 const multer = require("multer");
 
 // Middlewares
 app.use(express.json());
-
+app.use("/images", express.static(path.join(__dirname, "/images")));
 // Routes
 app.use("/api/auth", authenticationRoutes);
 app.use("/api/users", usersRoutes);
@@ -28,11 +29,11 @@ const storage = multer.diskStorage({
     cb(null, "images");
   },
   filename: (req, file, cb) => {
-    cb(null, "hello.jpeg");
+    cb(null, req.body.name);
   },
 });
 const upload = multer({ storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
+app.post("/api/upload", upload.single("photo"), (req, res) => {
   res.status(200).json("File has been uploaded");
 });
 
